@@ -1,0 +1,5 @@
+/*
+The 
+
+The purpose of the program is to help Christians to recite the Scripture well.
+*/
