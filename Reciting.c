@@ -10,7 +10,9 @@ The purpose of the program is to help Christians to recite the Scripture well.
 #include <stdlib.h>
 int main() {
 	int chap, vers, mode;
-	
+	printf("책 선택: ");
+	/////책 선택하는 과정
+	printf("장 선택:");
 	scanf("%d", &chap);
 	at:
 		printf("절 선택:");
