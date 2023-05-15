@@ -10,21 +10,41 @@ The purpose of the program is to help Christians to recite the Scripture well.
 #include <stdlib.h>
 
 void reciting();
-void firstpage();
+int firstpage();
+void create();
+void delete();
+void update();
+void each();
 
 int main() {
-	
-    firstpage();
-    
-    reciting();
+    int in;
+	while(1){
+        in = firstpage();
 
+        if(in == 1)
+            reciting();
+        else if(in == 2)
+            create();
+        else if(in == 3)
+            delete();
+        else if(in == 4)
+            update();
+        else if(in == 5)
+            each();
+        
+
+        else
+            printf("잘못된 입력입니다. 다시 입력하세요 \n\n");
+        
+    }
 	return 0;
 }
 
 
-void firstpage(){
+int firstpage(){//처음 페이지로 메뉴 고르고 그 값을 반환까지 함. 
 
 }
+
 
 
 void reciting(){
@@ -140,9 +160,23 @@ void reciting(){
 					break;
 			}
 		if (strcmp(t, "-\n") == 0) //jump to next verse
-			return 0;
+			break; //변환됨.
 		else if (strcmp(t, a) != 0)//t is input value, and a is net contents of verse
 			goto b2;
 	}
 	fclose(f);
+}
+
+
+void create(){
+
+}
+void delete(){
+
+}
+void update(){
+
+}
+void each(){
+    
 }
