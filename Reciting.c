@@ -42,20 +42,41 @@ int main() {
 
 
 int firstpage(){//처음 페이지로 메뉴 고르고 그 값을 반환까지 함. 
+    int in;
+    //////////////////////첫 페이지 출력 내용 작성
+    scanf("%d", &in);
+    return in;
 
 }
 
 
 
 void reciting(){
+    ///책선택
+    FILE *book;
+    book = fopen("booklist.txt", "r");
+    int bi=0;
+    char books[66][20], thebook[20];
+	printf("책 선택: \n\n");
+    while(!feof(book)){
+        fscanf(book, "%s", books[bi]);
+        printf("%d. %s\n", bi+1, books[bi]);
+        bi++;
+    }
+    fclose(book);
+    scanf("%d", &bi);
+    strcpy(thebook, books[bi-1]);
+    strcat(thebook, ".txt");
+
+    printf("%s", thebook);
+
+	//\
+
     int chap, vers, mode;
-	printf("책 선택: ");
-	/////책 선택하는 과정
 	printf("장 선택:");
 	scanf("%d", &chap);
-	at:
-		printf("절 선택:");
-		scanf("%d", &vers);
+	printf("절 선택:");
+	scanf("%d", &vers);
 	
 	printf("\n\n1. 따라쓰기\n2. 암송\n");
 	scanf("%d", &mode);
@@ -73,7 +94,9 @@ void reciting(){
 	strcat(a, "장\n");
 	printf("%s", a);
 	FILE* f;
-	f = fopen("암송txt.txt", "r");
+	f = fopen(thebook, "r");
+
+
 	//searching wanted position
 	while (!feof(f)) {//searching chapter
 		fgets(t, Max, f);
@@ -88,21 +111,12 @@ void reciting(){
 			if (v == vers)
 				break;
 		}
-	else {//if choose the church
-		for (i = 1; i < -vers; i++)
-			while (!feof(f)) {
-				fgets(t, Max, f);
-				if (strcmp(t, "\n") == 0)
-					break;
-			}
-		fscanf(f, "%d. ", &v);
-		fgets(a, Max, f);
-	}
-
+	
 	if (vers != v && strcmp(t, "\n") != 0 && vers != -1) {//if file ends without wanted result, finish the pg with error message
 		printf("cannot be found\n");
 		exit(0);
 	}//end searching
+    
 	goto b2;
 
 	while (!feof(f)) {
@@ -178,5 +192,5 @@ void update(){
 
 }
 void each(){
-    
+
 }
