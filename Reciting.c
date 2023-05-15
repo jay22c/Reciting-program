@@ -8,8 +8,27 @@ The purpose of the program is to help Christians to recite the Scripture well.
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
+void reciting();
+void firstpage();
+
 int main() {
-	int chap, vers, mode;
+	
+    firstpage();
+    
+    reciting();
+
+	return 0;
+}
+
+
+void firstpage(){
+
+}
+
+
+void reciting(){
+    int chap, vers, mode;
 	printf("책 선택: ");
 	/////책 선택하는 과정
 	printf("장 선택:");
@@ -126,5 +145,4 @@ int main() {
 			goto b2;
 	}
 	fclose(f);
-	return 0;
 }
