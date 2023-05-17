@@ -32,7 +32,6 @@ int main() {
         else if(in == 5)
             each();
         
-
         else
             printf("잘못된 입력입니다. 다시 입력하세요 \n\n");
         
@@ -44,6 +43,18 @@ int main() {
 int firstpage(){//처음 페이지로 메뉴 고르고 그 값을 반환까지 함. 
     int in;
     //////////////////////첫 페이지 출력 내용 작성
+	
+
+    printf("1. reciting\n");
+    printf("2. create\n");
+    printf("3. delete\n");
+    printf("4. update\n");
+    printf("5. each\n\n");
+	
+	
+/////it'll continue
+	
+	
     scanf("%d", &in);
     return in;
 
