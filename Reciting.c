@@ -8,6 +8,7 @@ The purpose of the program is to help Christians to recite the Scripture well.
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 void reciting();
 int firstpage();
@@ -203,5 +204,27 @@ void update(){
 
 }
 void each(){
+    FILE* fp ; 
+    fp = fopen("dayBIbleVerse.txt","r");
+
+    time_t x1;
+    struct tm *p;
+    x1 = time(NULL);
+    p = localtime(&x1); // 시간함수
+	int* t ;
+    char  dv[128] ; 
+	
+	while(!feof(fp)){
+		fscanf(fp,"%d",t); 
+		//t = atoi(d[0]) ; 
+		if(*t== p->tm_mday){
+			fgets(dv,128,fp);
+			break ; 
+		}
+	}
+   
+	fclose(fp);
+	printf("%s",dv);
+
 
 }
