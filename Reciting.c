@@ -203,6 +203,47 @@ void delete(){
 void update(){
 
 }
+
+
+void hint(char str[] /* 구절 */ , char tf [] /*텍스트 파일 이름*/){
+	int hn ; //원하는 힌트 번호
+	printf("어떤 힌트를 원하시나요?\n 1. 첫글자 힌트\n 2. 글자 수 힌트\n 3. 챕터 힌트\n 0. 취소\n ");
+	scanf("%d",&hn);
+	if(strcmp(tf,"dayBibleVerse.txt")==0){
+		if( hn == 1 ){
+			printf("%c",str[3]);
+		}
+		if( hn == 2 ){
+			printf("%lu",strlen(str));
+		}
+		if( hn == 3 ){
+			while(1){ // str의 글자 하나씩 검사
+				int n = 0 ;
+				if(str[n] != '('){ // '('가 아니라면 continue 
+					continue ; 
+				}
+				if(str[n] == ')'){ // '('가 나오면 
+					while(str[n] != ')'){ // ')'가 나오기 전까지 프린트
+						printf("%c",str[n]);
+					}
+				}
+				break ; 
+			}
+		}
+	}
+	else if(strcmp(tf,"dayBibleVerse.txt")!=0){
+		if( hn == 1 ) {
+			printf("%c",str[3]);
+		}
+		if( hn == 2 ){
+			printf("%lu",strlen(str));
+		}
+		if( hn == 3 ){
+			printf("%c",str[0]);
+		}
+	}
+}
+
 void each(){
     FILE* fp ; 
     fp = fopen("dayBIbleVerse.txt","r");
@@ -216,7 +257,6 @@ void each(){
 	
 	while(!feof(fp)){
 		fscanf(fp,"%d",t); 
-		//t = atoi(d[0]) ; 
 		if(*t== p->tm_mday){
 			fgets(dv,128,fp);
 			break ; 
