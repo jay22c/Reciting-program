@@ -175,9 +175,13 @@ void reciting(){
 			printf("%d. %s", v, a);
 			goto b2;
 		}
-		else if (strcmp(t, "?\n") == 0) {//jump to next verse
-			printf("\n* 이어서 입력\n/ 다음 절로 이동\n] 다음 단락으로 이동\n? 도움말\n- 종료\n\n");
+		else if (strcmp(t, ">\n") == 0) {//show the contents of verse
+			printf("%d. %s", v, a);
 			goto b2;
+		}
+		else if (strcmp(t, "?\n") == 0) {//jump to next verse
+			printf("\n* 이어서 입력\n> 힌트\n/ 다음 절로 이동\n] 다음 단락으로 이동\n? 도움말\n- 종료\n\n");
+			hint(t, thebook);
 		}
 		else if (strcmp(t, "]\n") == 0) //jump to next paragraph
 			while (!feof(f)) {
