@@ -16,6 +16,7 @@ void create();
 void delete();
 void update();
 void each();
+void ranVerse();
 
 int main() {
     int in;
@@ -247,6 +248,40 @@ void hint(char str[] /* 구절 */ , char tf [] /*텍스트 파일 이름*/){
 		}
 	}
 }
+
+
+void ranVerse(char tf [] /*텍스트 파일 이름*/){
+    FILE* fp ; 
+
+	int line=0;
+	char v[128];
+
+	fp=fopen(tf,"r");
+	while (fgets(v, sizeof(line), fp) != NULL ) {
+		line++ ; 
+	}
+
+	srand(time(0)); 
+	int rn = rand()%line+1; 
+
+	int t ;
+    char  dv[128] ; 
+	
+	while(!feof(fp)){
+		fscanf(fp,"%d",&t); 
+		fgetc(fp);
+		if( t== rn){
+			fgets(dv,128,fp);
+			break ; 
+		}
+	}
+	fclose(fp);
+	printf("%s",dv);
+}
+
+
+
+
 
 void each(){
     FILE* fp ; 
