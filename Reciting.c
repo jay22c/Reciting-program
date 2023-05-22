@@ -17,6 +17,7 @@ void delete();
 void update();
 void each();
 void ranVerse();
+void hint() ; 
 
 int main() {
     int in;
@@ -33,6 +34,8 @@ int main() {
             update();
         else if(in == 5)
             each();
+	else if(in == 6)
+	    ranVerse(); 
         
         else
             printf("잘못된 입력입니다. 다시 입력하세요 \n\n");
@@ -51,7 +54,9 @@ int firstpage(){//처음 페이지로 메뉴 고르고 그 값을 반환까지 �
     printf("2. create\n");
     printf("3. delete\n");
     printf("4. update\n");
-    printf("5. each\n\n");
+    printf("5. each\n");
+    printf("6. randomVerse\n\n");
+	
 	
 	
 /////it'll continue
@@ -200,13 +205,82 @@ void reciting(){
 
 
 void create(){
-
+	
+	char ct[60] ; 
+	printf("새롭게 만들고 싶은 챕터를 알려주세요. ");
+	scanf("%s",ct);
+	FILE* fp ; 
+	fp = fopen("booklist.txt","w");
+	fprintf(fp,"%s",ct);
+	fclose(fp) ; 
+	FILE* nc ; 
+	strcat(ct,".txt");
+	nc = fopen(ct,"w");
+	char vs[128] ; 
+	printf("쓰고 싶은 내용을 절 별로 입력해주세요.\n 내용을 다 입력하셨다면 0번 을 눌러서 종료해주세요.\n 종료: 0 \n ");
+	scanf(" %[^\n]",vs);
+	
+	while(!(strcmp(vs,"0")==0)){
+		fprintf(nc,"%s",vs);
+		fprintf(nc,"\n");
+		while(getchar() != '\n');
+		scanf(" %[^\n]",vs);
+	}
+	fclose(nc);
+	printf("생성되었습니다.\n");
 }
 void delete(){
+	FILE* fp ; 
+	char chap[128] ; 
+	char ucd[50];
+	char cd[50] ; 
+	fp=fopen("booklist.txt","r");
+	while (!feof(fp) ) {
+		fgets( chap , 128, fp);
+		printf("%s",chap);
+	}
+	printf("삭제하고싶은 챕터를 입력해주세요. ");
+	scanf("%s",ucd);		
 
+	while(!feof(fp)){
+		fgets( cd , 50, fp);
+		if(strcmp(ucd,cd)==0){
+			strcpy(cd," ") ;
+		}
+	}
+
+	
 }
 void update(){
 
+	FILE* chl ;
+	char ch[60] ; 
+	chl=fopen("booklist.txt","r");
+	while (!feof(chl) ) {
+		fgets( ch , 128, chl);
+		printf("%s\n",ch);
+	}
+	fclose(chl) ; 
+	char uch [60] ;
+	printf("수정하고싶은 챕터를 말해주세요.");
+	scanf("%s",uch) ; 
+	strcat(uch,".txt");
+
+	FILE* ucf ; 
+	ucf = fopen(uch,"w");
+	char ubv[128] ; 
+
+	printf("수정하려는 내용을 절 별로 입력해주세요.\n 내용을 다 입력하셨다면 0번 을 눌러서 종료해주세요.\n 종료: 0 \n ");
+	scanf(" %[^\n]",ubv);
+	while(!(strcmp(ubv,"0")==0)){
+		fprintf(ucf,"%s",ubv);
+		fprintf(ucf,"\n");
+		while(getchar() != '\n');
+		scanf(" %[^\n]",ubv);
+	}
+
+	fclose(ucf);
+	printf("수정되었습니다.\n");
 }
 
 
@@ -250,16 +324,31 @@ void hint(char str[] /* 구절 */ , char tf [] /*텍스트 파일 이름*/){
 }
 
 
-void ranVerse(char tf [] /*텍스트 파일 이름*/){
+void ranVerse(){
+	
+	FILE* ch ;
+	ch = fopen("booklist.txt","r");
+	char cp[66][30] ; 
+	int l1 ; 
+	while (fgets(cp[l1], sizeof(cp[l1]), ch) != NULL) {
+        l1++;
+    }
+	srand(time(0)); 
+	int rcp = rand()%l1;
+	char rcap[35] ; 
+	strcpy(rcap,cp[rcp]);
+	strcat(rcap,".txt");
+	fclose(ch);
+
     FILE* fp ; 
 
 	int line=0;
 	char v[128];
 
-	fp=fopen(tf,"r");
-	while (fgets(v, sizeof(line), fp) != NULL ) {
-		line++ ; 
-	}
+	fp=fopen(rcap,"r");
+	while (fgets(v, sizeof(v), fp) != NULL) {
+        line++;
+    }
 
 	srand(time(0)); 
 	int rn = rand()%line+1; 
@@ -271,7 +360,7 @@ void ranVerse(char tf [] /*텍스트 파일 이름*/){
 		fscanf(fp,"%d",&t); 
 		fgetc(fp);
 		if( t== rn){
-			fgets(dv,128,fp);
+			fgets(dv, sizeof(dv), fp);
 			break ; 
 		}
 	}
